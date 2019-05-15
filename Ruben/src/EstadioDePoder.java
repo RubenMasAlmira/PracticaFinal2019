@@ -18,8 +18,8 @@ public enum EstadioDePoder {
         }
     }
     private static Map<String,Integer> estadios;
-    public final String nombre;
-    public final int limeteInferior;
+    private final String nombre;
+    private final int limeteInferior;
 
     EstadioDePoder(String nombreDelEstadio,int limeteInferior){
         this.nombre=nombreDelEstadio;
