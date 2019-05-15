@@ -11,13 +11,7 @@ public enum EstadioDePoder {
     PLANETARIOS("Planetario",20),
     SUPERIOR("Superior",10),
     MUNDANO("Mundano",0);
-    static {
-        Map<String,Integer> estadios=new HashMap<>();
-        for(EstadioDePoder e:EstadioDePoder.values()){
-            estadios.put(e.nombre,e.limeteInferior);
-        }
-    }
-    private static Map<String,Integer> estadios;
+
     private final String nombre;
     private final int limeteInferior;
 
@@ -35,6 +29,19 @@ public enum EstadioDePoder {
     }
 
     public static EstadioDePoder getEstadioDePoder(int poder){
+        EstadioDePoder[] estadios=EstadioDePoder.values();
+        for(EstadioDePoder estadio:estadios){
+            if(poder>=estadio.limeteInferior){
+                return estadio;
+            }
+        }
+        return null;
+    }
 
+    public static void main(String[] args) {
+        for (int i = 0; i < 100; i++) {
+            System.out.println(i+"-"+getEstadioDePoder(i));
+
+        }
     }
 }
