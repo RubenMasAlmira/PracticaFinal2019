@@ -1,23 +1,29 @@
+import java.util.*;
+
 public enum EstadioDePoder {
-    OMNICO("Omnico",100,91),
-    GUARDIAN_UNIVERSAL("Guardian Univesal",90,81),
-    MULTIVERSAL("Multiversal",80,71),
-    ENTIDAD_COSMICA("Entidad Cosmica",70,61),
-    ARMONICO("Armónico",60,51),
-    UNIVERSAL("Universal",50,41),
-    GALACTICOS("Galactico",40,31),
-    PLANETARIOS("Planetario",30,21),
-    SUPERIOR("Superior",20,11),
-    MUNDANO("Mundano",10,0);
+    OMNICO("Omnico",90),
+    GUARDIAN_UNIVERSAL("Guardian Univesal",80),
+    MULTIVERSAL("Multiversal",70),
+    ENTIDAD_COSMICA("Entidad Cosmica",60),
+    ARMONICO("Armónico",50),
+    UNIVERSAL("Universal",40),
+    GALACTICOS("Galactico",30),
+    PLANETARIOS("Planetario",20),
+    SUPERIOR("Superior",10),
+    MUNDANO("Mundano",0);
+    static {
+        Map<String,Integer> estadios=new HashMap<>();
+        for(EstadioDePoder e:EstadioDePoder.values()){
+            estadios.put(e.nombre,e.limeteInferior);
+        }
+    }
+    private static Map<String,Integer> estadios;
+    public final String nombre;
+    public final int limeteInferior;
 
-    private final String nombre;
-    private final int limeteSuperior;
-    private final int limeteInferior;
-
-    EstadioDePoder(String nombreDelEstadio,int limeteSuperior,int limeteInferior){
+    EstadioDePoder(String nombreDelEstadio,int limeteInferior){
         this.nombre=nombreDelEstadio;
         this.limeteInferior=limeteInferior;
-        this.limeteSuperior=limeteSuperior;
     }
 
     public String getNombre() {
@@ -28,9 +34,7 @@ public enum EstadioDePoder {
         return limeteInferior;
     }
 
-    public int getLimeteSuperior() {
-        return limeteSuperior;
+    public static EstadioDePoder getEstadioDePoder(int poder){
+
     }
-
-
 }

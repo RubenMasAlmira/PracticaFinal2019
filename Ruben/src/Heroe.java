@@ -28,12 +28,7 @@ public class Heroe {
     }
 
     public EstadioDePoder getEstadioDePoder(){
-        for (EstadioDePoder e:EstadioDePoder.values()) {
-            if(e.getLimeteSuperior()<=this.nivelDePoder && e.getLimeteInferior()>=this.nivelDePoder){
-                return e;
-            }
-        }
-        return null;
+        return EstadioDePoder.ARMONICO;
     }
 
     public String getDescripcion() {
