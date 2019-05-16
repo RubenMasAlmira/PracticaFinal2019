@@ -7,7 +7,8 @@ public class prueba {
         ventana.setLayout(new BorderLayout());
         ventana.add(new PanelDeIntroduccionDelUsuario(),BorderLayout.CENTER);
         ventana.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        ventana.setBounds(200,200,20,20);
+        ventana.setBounds(20,20,200,200);
+        ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
     }
 }
