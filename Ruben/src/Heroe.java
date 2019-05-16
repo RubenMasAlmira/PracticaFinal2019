@@ -1,19 +1,30 @@
 import java.util.Objects;
 
 public class Heroe {
-    private final String nombreHeroico;
-    private int nivelDePoder;
-    private final String descripcion;
+    protected final String nombreHeroico;
+    protected int nivelDePoder;
+    protected final String descripcion;
 
     Heroe(String nombreHeroico,int nivelDePoder,String descripcion){
-        this.nombreHeroico=nombreHeroico;
+        if(estaVacio(nombreHeroico)){
+            throw new IllegalArgumentException("El nombre del Heroe no puede estar vacio");
+        }else{
+            this.nombreHeroico=nombreHeroico;
+        }
         if(comprobarNivelDePoder(nivelDePoder)){
             this.nivelDePoder=nivelDePoder;
         }
         this.descripcion=descripcion;
     }
 
-    protected boolean comprobarNivelDePoder(int nivelDePoder){
+    protected boolean estaVacio(String nombre){
+        if (nombre.trim().equals("") || nombre.equals(null)){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean comprobarNivelDePoder(int nivelDePoder){
         if(nivelDePoder<0){
             throw new IllegalArgumentException("El nivel de poder no puede ser negativo");
         }else if(nivelDePoder>100){
@@ -28,7 +39,7 @@ public class Heroe {
     }
 
     public EstadioDePoder getEstadioDePoder(){
-        return EstadioDePoder.ARMONICO;
+        return EstadioDePoder.getEstadioDePoder(this.nivelDePoder);
     }
 
     public String getDescripcion() {
@@ -50,19 +61,20 @@ public class Heroe {
 
     @Override
     public String toString(){
-        return nombreHeroico.substring(0,1).toUpperCase()+nombreHeroico.substring(1).toLowerCase()+"\n      "+ descripcion;
+        return nombreHeroico.substring(0,1).toUpperCase()+nombreHeroico.substring(1).toLowerCase()+"    Nvl:"+nivelDePoder+"\n      "+ descripcion;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Heroe)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Heroe heroe = (Heroe) o;
-        return Objects.equals(nombreHeroico, heroe.nombreHeroico);
+        return nivelDePoder == heroe.nivelDePoder &&
+                Objects.equals(nombreHeroico, heroe.nombreHeroico);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nombreHeroico);
+        return Objects.hash(nombreHeroico, nivelDePoder);
     }
 }

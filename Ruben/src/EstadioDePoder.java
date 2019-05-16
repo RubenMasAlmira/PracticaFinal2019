@@ -1,5 +1,3 @@
-import java.util.*;
-
 public enum EstadioDePoder {
     OMNICO("Omnico",90),
     GUARDIAN_UNIVERSAL("Guardian Univesal",80),
@@ -13,35 +11,28 @@ public enum EstadioDePoder {
     MUNDANO("Mundano",0);
 
     private final String nombre;
-    private final int limeteInferior;
+    private final int limeteDeNivelInferior;
 
     EstadioDePoder(String nombreDelEstadio,int limeteInferior){
         this.nombre=nombreDelEstadio;
-        this.limeteInferior=limeteInferior;
+        this.limeteDeNivelInferior =limeteInferior;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public int getLimeteInferior() {
-        return limeteInferior;
+    public int getLimeteDeNivelInferior() {
+        return limeteDeNivelInferior;
     }
 
     public static EstadioDePoder getEstadioDePoder(int poder){
         EstadioDePoder[] estadios=EstadioDePoder.values();
         for(EstadioDePoder estadio:estadios){
-            if(poder>=estadio.limeteInferior){
+            if(poder>=estadio.limeteDeNivelInferior){
                 return estadio;
             }
         }
         return null;
-    }
-
-    public static void main(String[] args) {
-        for (int i = 0; i < 100; i++) {
-            System.out.println(i+"-"+getEstadioDePoder(i));
-
-        }
     }
 }
