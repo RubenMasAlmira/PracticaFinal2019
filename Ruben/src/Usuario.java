@@ -1,12 +1,24 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Objects;
 
-public class Usuario{
+public class Usuario implements Escribible{
+    private static File ficheroDeUsuarios=new File("Usuarios");
     private final long numeroDeIndentificacion;
     private final String nombre;
     private final String apellidos;
     private String correoElectronico;
     private final ListaDeHeroes lista=new ListaDeHeroes();
-
+    static{
+        if (!ficheroDeUsuarios.exists()){
+            try {
+                ficheroDeUsuarios.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public Usuario(long numeroDeIndentificacion, String nombre, String apellidos, String correoElectronico) {
         this.numeroDeIndentificacion = numeroDeIndentificacion;
@@ -50,5 +62,11 @@ public class Usuario{
     @Override
     public int hashCode() {
         return Objects.hash(numeroDeIndentificacion);
+    }
+
+
+    @Override
+    public void escribir(File fichero) {
+        try(FileWriter fw=new f){}
     }
 }
