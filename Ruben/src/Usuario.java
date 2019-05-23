@@ -1,14 +1,14 @@
 import java.util.Objects;
 
 public class Usuario{
-    private final int numeroDeIndentificacion;
+    private final long numeroDeIndentificacion;
     private final String nombre;
     private final String apellidos;
     private String correoElectronico;
     private final ListaDeHeroes lista=new ListaDeHeroes();
 
 
-    public Usuario(int numeroDeIndentificacion, String nombre, String apellidos, String correoElectronico) {
+    public Usuario(long numeroDeIndentificacion, String nombre, String apellidos, String correoElectronico) {
         this.numeroDeIndentificacion = numeroDeIndentificacion;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -35,7 +35,7 @@ public class Usuario{
         return lista;
     }
 
-    public int getNumeroDeIndentificacion() {
+    public long getNumeroDeIndentificacion() {
         return numeroDeIndentificacion;
     }
 
