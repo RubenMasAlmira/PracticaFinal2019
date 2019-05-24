@@ -4,9 +4,10 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class ListaDeHeroes implements Escribible,Legible{
+
     private final Set<Heroe> listaHeroes;
 
-    ListaDeHeroes(){
+    ListaDeHeroes(String numeroDeIdentificacion){
         listaHeroes=new TreeSet<>();
     }
 

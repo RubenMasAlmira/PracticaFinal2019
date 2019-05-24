@@ -2,16 +2,8 @@ import java.io.File;
 import java.util.List;
 
 public class Lector {
-        private static Lector miLector;
-        public static Lector getLector(){
-            return miLector;
-        }
-
-
         private static Legible lista;
         private static File fichero;
-
-
         private Lector (Legible lista , File fichero){
             this.lista=lista;
             this.fichero=fichero;

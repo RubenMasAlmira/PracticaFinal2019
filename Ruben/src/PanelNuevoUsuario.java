@@ -12,8 +12,8 @@ public class PanelNuevoUsuario extends PanelDeIntroduccionDelUsuario{
         add(correoElectronico);
     }
 
-    public Usuario getUsuario(){
+    /*public Usuario getUsuario(){
         return new Usuario(getNumeroUsuario(),nombreYApellido.getText().substring(0,nombreYApellido.getText().indexOf(' ')),nombreYApellido.getText().substring(nombreYApellido.getText().indexOf(' ')),correoElectronico.getText());
-    }
+    }*/
 
 }
