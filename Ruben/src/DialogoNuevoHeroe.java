@@ -7,7 +7,7 @@ public class DialogoNuevoHeroe extends JDialog {
     DialogoNuevoHeroe(){
         setLayout(new BorderLayout());
         ComboBox tipoHeroe=new ComboBox<Heroe>();
-        add(tipoHeroe,BorderLayout.NORTH);
+        add(tipoHeroe);
 
     }
 
