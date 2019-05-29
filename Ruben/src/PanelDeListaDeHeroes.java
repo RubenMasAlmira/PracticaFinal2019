@@ -12,13 +12,12 @@ public class PanelDeListaDeHeroes extends JFrame {
         setBounds(20,20,500,500);
         add(new JLabel("Usario: "+usuarioActual.getNombre() + " " + usuarioActual.getApellidos()),BorderLayout.SOUTH);
         add(new PanelBotonesHeroe(usuarioActual));
-        anyadir=new JButton();
+        anyadir=new JButton("Añadir nuevo Heroe");
         anyadir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DialogoNuevoHeroe nuevoHeroe=new DialogoNuevoHeroe();
                 usuarioActual.getListaDeHeroes().anyadirHeroe(nuevoHeroe.getHeroe());
-                add(new PanelBotonesHeroe(usuarioActual),BorderLayout.CENTER);
             }
         });
         add(anyadir,BorderLayout.NORTH);
