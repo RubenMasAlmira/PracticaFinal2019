@@ -1,29 +1,38 @@
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class Usuario implements Escribible,Legible{
-
-    private final String  numeroDeIndentificacion;
+public class Usuario implements Escribible{
+    public static int LINEAS_DE_LECTURA=6;
+    private final String indentificacionDeUsuario;
     private final String nombre;
     private final String apellidos;
     private String correoElectronico;
     private String fechaDeNacimiento;
     private String fechaDeRegistro;
-    private ListaDeHeroes lista;
+    private ListaDeHeroes listaDeHeroes;
 
-    public Usuario(String numeroDeIndentificacion, String nombre, String apellidos, String correoElectronico,String fechaDeNacimiento) {
-        this.numeroDeIndentificacion = numeroDeIndentificacion;
+    public Usuario(String indentificacionDeUsuario, String nombre, String apellidos, String correoElectronico, String fechaDeNacimiento, String fechaDeRegistro, String ficheroDeGuardado) {
+        if(indentificacionDeUsuario.length()!=10){
+            throw new IllegalArgumentException("El  identificador de usuario ha de tener 10 carácteres");
+        }
+        this.indentificacionDeUsuario = indentificacionDeUsuario;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.correoElectronico = correoElectronico;
         this.fechaDeNacimiento=fechaDeNacimiento;
-        this.fechaDeRegistro=new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
-        this.lista=new ListaDeHeroes(numeroDeIndentificacion);
+        this.fechaDeRegistro=fechaDeRegistro;
+        if(ficheroDeGuardado=="" || ficheroDeGuardado==null || !Paths.get(ficheroDeGuardado).toFile().exists()){
+            this.listaDeHeroes =new ListaDeHeroes(indentificacionDeUsuario);
+        }else{
+            this.listaDeHeroes = listaDeHeroes.leer(Paths.get(indentificacionDeUsuario).toFile());
+        }
+    }
+
+    public Usuario(String indentificacionDeUsuario, String nombre, String apellidos, String correoElectronico, String fechaDeNacimiento) {
+        this(indentificacionDeUsuario,nombre,apellidos,correoElectronico,fechaDeNacimiento,new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date()),null);
+
     }
 
     public String getNombre() {
@@ -42,12 +51,12 @@ public class Usuario implements Escribible,Legible{
         this.correoElectronico = correoElectronico;
     }
 
-    public ListaDeHeroes getLista() {
-        return lista;
+    public ListaDeHeroes getListaDeHeroes() {
+        return listaDeHeroes;
     }
 
-    public String getNumeroDeIndentificacion() {
-        return numeroDeIndentificacion;
+    public String getIndentificacionDeUsuario() {
+        return indentificacionDeUsuario;
     }
 
     public String getFechaDeNacimiento() {
@@ -63,54 +72,36 @@ public class Usuario implements Escribible,Legible{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Usuario usuario = (Usuario) o;
-        return numeroDeIndentificacion == usuario.numeroDeIndentificacion;
+        return indentificacionDeUsuario == usuario.indentificacionDeUsuario;
     }
 
-    public String impresionDeUsuario() {
-        String salida="";
-       salida+=this.numeroDeIndentificacion+" \n";
-       salida+=this.nombre+" \n";
-       salida+=this.apellidos+" \n";
-       salida+=this.correoElectronico+" \n";
-       salida+=this.fechaDeNacimiento+" \n";
-       salida+=this.fechaDeRegistro+" \n";
-       return salida;
-    }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numeroDeIndentificacion);
+        return Objects.hash(indentificacionDeUsuario);
     }
 
 
     @Override
-    public void escribir( File fichero) {
-
+    public String stringDeEscritura() {
+        String salida="";
+        salida+=this.indentificacionDeUsuario +" \n";
+        salida+=this.nombre+" \n";
+        salida+=this.apellidos+" \n";
+        salida+=this.correoElectronico+" \n";
+        salida+=this.fechaDeNacimiento+" \n";
+        salida+=this.fechaDeRegistro+" \n";
+        return salida;
     }
 
     @Override
-    public List leer(File fichero) {
-        if (!fichero.exists()){
-            try {
-                fichero.createNewFile();
-            } catch (IOException e) {
-                new IllegalArgumentException("No se ha encontrado el fichero");
-            }
-        }
-        List<String> lineas=null;
-        List<Usuario> usuarios=null;
-        try {
-            lineas = Files.readAllLines(Paths.get(fichero.toURI()));
-            Iterator iterator=lineas.iterator();
-            usuarios=new ArrayList<>();
-
-
-            while(iterator.hasNext()){
-                usuarios.add(new Usuario((String)iterator.next(),(String)iterator.next(),(String)iterator.next(),(String)iterator.next(),(String)iterator.next()));
-            }
+    public void escribir(File fichero)  {
+        try(FileWriter fw = new FileWriter(fichero)) {
+            fw.write(this.stringDeEscritura());
+            listaDeHeroes.escribir();
         }catch (IOException ioe){
             ioe.printStackTrace();
         }
-        return usuarios;
     }
+
 }

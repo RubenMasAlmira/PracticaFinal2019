@@ -7,6 +7,11 @@ public class Mitologia {
     public Mitologia(String nombre, String origen) {
         this.nombre = nombre;
         this.origen = origen;
+        if(Utilidades.comprobarVacio(nombre)) {
+            throw new IllegalArgumentException("El nombre de la mitología no puede estar vacio");
+        }else if(Utilidades.comprobarVacio(origen)){
+            throw new IllegalArgumentException("El origen de la mitología no puede estar vacio");
+        }
     }
 
     public String getNombre() {
@@ -35,4 +40,6 @@ public class Mitologia {
     public int hashCode() {
         return Objects.hash(nombre);
     }
+
+
 }

@@ -1,12 +1,12 @@
 import java.util.Objects;
 
-public class Heroe {
+public class Heroe{
     protected final String nombreHeroico;
     protected int nivelDePoder;
     protected final String descripcion;
 
     Heroe(String nombreHeroico,int nivelDePoder,String descripcion){
-        if(estaVacio(nombreHeroico)){
+        if(Utilidades.comprobarVacio(nombreHeroico)){
             throw new IllegalArgumentException("El nombre del Heroe no puede estar vacio");
         }else{
             this.nombreHeroico=nombreHeroico;
@@ -15,13 +15,6 @@ public class Heroe {
             this.nivelDePoder=nivelDePoder;
         }
         this.descripcion=descripcion;
-    }
-
-    protected boolean estaVacio(String nombre){
-        if (nombre.trim().equals("") || nombre.equals(null)){
-            return true;
-        }
-        return false;
     }
 
     private boolean comprobarNivelDePoder(int nivelDePoder){
@@ -55,13 +48,15 @@ public class Heroe {
     }
 
     public int subirNivel(){
-        nivelDePoder++;
-        return nivelDePoder;
+        if(nivelDePoder>100){
+            throw new IllegalArgumentException("El nivel de "+nombreHeroico+"es el maximo");
+        }
+        return nivelDePoder++;
     }
 
     @Override
     public String toString(){
-        return nombreHeroico.substring(0,1).toUpperCase()+nombreHeroico.substring(1).toLowerCase()+"    Nvl:"+nivelDePoder+"\n      "+ descripcion;
+        return nombreHeroico+"    Nvl:"+nivelDePoder+"\n      ";
     }
 
     @Override
@@ -77,4 +72,6 @@ public class Heroe {
     public int hashCode() {
         return Objects.hash(nombreHeroico, nivelDePoder);
     }
+
+
 }

@@ -29,7 +29,7 @@ public class PanelDeIntroduccionDelUsuario extends JPanel {
         });
     }
 
-    public Long getNumeroUsuario() {
-        return Long.parseLong(numeroUsuario.getText());
+    public String getNumeroUsuario() {
+        return numeroUsuario.getText();
     }
 }

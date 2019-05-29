@@ -31,6 +31,8 @@ public class Dioses extends Heroe {
 
     @Override
     public String toString() {
-        return mitologia+"\n"+super.toString();
+        return super.toString();
+
     }
+
 }

@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Objects;
 
 public class ConIdentidadSecreta extends Heroe {
@@ -18,7 +21,7 @@ public class ConIdentidadSecreta extends Heroe {
 
     @Override
     public String toString() {
-        return identidadReal.toString()+"\n"+super.toString();
+        return identidadReal.toString()+"-\n"+super.toString();
     }
 
     @Override
@@ -34,4 +37,6 @@ public class ConIdentidadSecreta extends Heroe {
     public int hashCode() {
         return Objects.hash(super.hashCode(), identidadReal);
     }
+
+
 }

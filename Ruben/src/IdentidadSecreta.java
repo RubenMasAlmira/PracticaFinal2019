@@ -1,4 +1,8 @@
-public class IdentidadSecreta {
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class IdentidadSecreta{
     private final String nombreReal;
 
     IdentidadSecreta(String nombreReal){
@@ -11,7 +15,11 @@ public class IdentidadSecreta {
 
     @Override
     public String toString() {
-        return "Nombre:"+nombreReal;
+        return nombreReal;
     }
+
+    public void escribir() {
+    }
+
 
 }
