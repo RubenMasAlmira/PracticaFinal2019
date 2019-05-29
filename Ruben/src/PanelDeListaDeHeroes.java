@@ -1,14 +1,27 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PanelDeListaDeHeroes extends JFrame {
     private Usuario usuarioActual;
+    private JButton anyadir;
 
     PanelDeListaDeHeroes(Usuario usuarioActual) {
         setLayout(new BorderLayout());
         setBounds(20,20,500,500);
         add(new JLabel("Usario: "+usuarioActual.getNombre() + " " + usuarioActual.getApellidos()),BorderLayout.SOUTH);
         add(new PanelBotonesHeroe(usuarioActual));
+        anyadir=new JButton();
+        anyadir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DialogoNuevoHeroe nuevoHeroe=new DialogoNuevoHeroe();
+                usuarioActual.getListaDeHeroes().anyadirHeroe(nuevoHeroe.getHeroe());
+                add(new PanelBotonesHeroe(usuarioActual),BorderLayout.CENTER);
+            }
+        });
+        add(anyadir,BorderLayout.NORTH);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
