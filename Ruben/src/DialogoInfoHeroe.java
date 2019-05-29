@@ -11,7 +11,7 @@ public class DialogoInfoHeroe extends JDialog {
         setBounds(20,50,200,500);
         setLocationRelativeTo(null);
         add(infoAdecuada(heroeActual),BorderLayout.CENTER);
-        add(new PanelBotonesDeModificacion());
+        add(new PanelBotonesDeModificacionYBorrado(),BorderLayout.SOUTH);
         setVisible(true);
 
     }

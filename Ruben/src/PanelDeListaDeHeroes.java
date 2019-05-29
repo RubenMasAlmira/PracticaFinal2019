@@ -7,7 +7,7 @@ public class PanelDeListaDeHeroes extends JFrame {
     PanelDeListaDeHeroes(Usuario usuarioActual) {
         setLayout(new BorderLayout());
         setBounds(20,20,500,500);
-        add(new JLabel("Usario: "+usuarioActual.getNombre() + " " + usuarioActual.getApellidos()),BorderLayout.NORTH);
+        add(new JLabel("Usario: "+usuarioActual.getNombre() + " " + usuarioActual.getApellidos()),BorderLayout.SOUTH);
         add(new PanelBotonesHeroe(usuarioActual));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
