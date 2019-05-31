@@ -13,7 +13,7 @@ public class Usuario implements Escribible{
     private String fechaDeRegistro;
     private ListaDeHeroes listaDeHeroes;
 
-    public Usuario(String indentificacionDeUsuario, String nombre, String apellidos, String correoElectronico, String fechaDeNacimiento, String fechaDeRegistro, String ficheroDeGuardado) {
+    public Usuario(String indentificacionDeUsuario, String nombre, String apellidos, String correoElectronico, String fechaDeNacimiento,String fechaDeRegistro, String ficheroDeGuardado) {
         if(indentificacionDeUsuario.length()!=10){
             throw new IllegalArgumentException("El  identificador de usuario ha de tener 10 carácteres");
         }
@@ -31,8 +31,8 @@ public class Usuario implements Escribible{
     }
 
     public Usuario(String indentificacionDeUsuario, String nombre, String apellidos, String correoElectronico, String fechaDeNacimiento) {
-        this(indentificacionDeUsuario,nombre,apellidos,correoElectronico,fechaDeNacimiento,new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date()),null);
-
+        this(indentificacionDeUsuario,nombre,apellidos,correoElectronico,fechaDeNacimiento
+                ,new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date()),null);
     }
 
     public String getNombre() {

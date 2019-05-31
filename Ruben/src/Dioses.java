@@ -2,12 +2,12 @@ import java.util.Objects;
 
 public class Dioses extends Heroe {
     private final Mitologia mitologia;
-    Dioses(String nombreHeroico, int nivelDePoder, String descripcion,Mitologia mitologia) {
+    Dioses(String nombreHeroico, String nivelDePoder, String descripcion,Mitologia mitologia) {
         super(nombreHeroico, nivelDePoder, descripcion);
         this.mitologia=mitologia;
     }
 
-    Dioses(String nombreHeroico, int nivelDePoder, String descripcion,String nombreMitologia,String origen) {
+    Dioses(String nombreHeroico, String nivelDePoder, String descripcion,String nombreMitologia,String origen) {
         this(nombreHeroico,nivelDePoder,descripcion,new Mitologia(nombreMitologia,origen));
     }
 

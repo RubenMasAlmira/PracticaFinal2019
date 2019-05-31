@@ -5,22 +5,28 @@ public class Heroe{
     protected int nivelDePoder;
     protected final String descripcion;
 
-    Heroe(String nombreHeroico,int nivelDePoder,String descripcion){
+    Heroe(String nombreHeroico,String nivelDePoder,String descripcion){
         if(Utilidades.comprobarVacio(nombreHeroico)){
             throw new IllegalArgumentException("El nombre del Heroe no puede estar vacio");
         }else{
             this.nombreHeroico=nombreHeroico;
         }
         if(comprobarNivelDePoder(nivelDePoder)){
-            this.nivelDePoder=nivelDePoder;
+            this.nivelDePoder=Integer.parseInt(nivelDePoder);
         }
         this.descripcion=descripcion;
     }
 
-    private boolean comprobarNivelDePoder(int nivelDePoder){
-        if(nivelDePoder<0){
+    private boolean comprobarNivelDePoder(String nivelDePoder){
+        try{
+            Integer.parseInt(nivelDePoder);
+        }catch (NumberFormatException nfe){
+            new IllegalArgumentException("El nivel de poder ha de ser un número entero del 0 al 100");
+        }
+        int nivel=Integer.parseInt(nivelDePoder);
+        if(nivel<0){
             throw new IllegalArgumentException("El nivel de poder no puede ser negativo");
-        }else if(nivelDePoder>100){
+        }else if(nivel>100){
             throw new IllegalArgumentException("El nivel de poder no puede estar por encima de 100");
         }else {
             return true;

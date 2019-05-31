@@ -6,12 +6,12 @@ import java.util.Objects;
 public class ConIdentidadSecreta extends Heroe {
     private final IdentidadSecreta identidadReal;
 
-    ConIdentidadSecreta(String nombreHeroico, int nivelDePoder, String descripcion,IdentidadSecreta identidad) {
+    ConIdentidadSecreta(String nombreHeroico, String nivelDePoder, String descripcion,IdentidadSecreta identidad) {
         super(nombreHeroico, nivelDePoder, descripcion);
         this.identidadReal=identidad;
     }
 
-    ConIdentidadSecreta(String nombreHeroico, int nivelDePoder, String descripcion,String nombre) {
+    ConIdentidadSecreta(String nombreHeroico,String nivelDePoder, String descripcion,String nombre) {
         this(nombreHeroico,nivelDePoder,descripcion,new IdentidadSecreta(nombre));
     }
 
