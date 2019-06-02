@@ -3,13 +3,14 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class PanelNuevoUsuario extends PanelDeIntroduccionDelUsuario{
-   private final JLabel nombreYApellido=new JLabel();
-    private final JLabel correoElectronico=new JLabel();
-    private final JLabel fechaDeNacimiento=new JLabel();
+public class PanelNuevoUsuario extends JPanel{
+   private final JTextField nombreYApellido=new JTextField();
+    private final JTextField correoElectronico=new JTextField();
+    private final JTextField fechaDeNacimiento=new JTextField();
+    private Usuario usuarioNuevo;
 
 
-    PanelNuevoUsuario(){
+    PanelNuevoUsuario(String numeroUsuario){
         setLayout(new GridLayout(0,2));
         add(new JLabel("Nombre completo:"));
         add(nombreYApellido);
@@ -31,11 +32,7 @@ public class PanelNuevoUsuario extends PanelDeIntroduccionDelUsuario{
     }
 
     public Usuario getUsuario(){
-        return new Usuario(getNumeroUsuario(),
-                nombreYApellido.getText().substring(0,nombreYApellido.getText().indexOf(' ')),
-                nombreYApellido.getText().substring(nombreYApellido.getText().indexOf(' ')),
-                correoElectronico.getText(),
-                fechaDeNacimiento.getText());
+        return usuarioNuevo;
     }
 
 }

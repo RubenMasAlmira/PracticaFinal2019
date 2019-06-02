@@ -34,9 +34,6 @@ public class PanelDeListaDeHeroes extends JFrame {
         setVisible(true);
     }
 
-    private void annyadeHeroe(Usuario usuarioActual){
-
-    }
 
 
     public static void main(String[] args) {

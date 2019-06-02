@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Usuario implements Escribible{
+    public static final int CANTIDAD_DE_NUMEROS_IDENTIFICACION = 10;
     public static int LINEAS_DE_LECTURA=6;
     private final String indentificacionDeUsuario;
     private final String nombre;
@@ -14,7 +15,7 @@ public class Usuario implements Escribible{
     private ListaDeHeroes listaDeHeroes;
 
     public Usuario(String indentificacionDeUsuario, String nombre, String apellidos, String correoElectronico, String fechaDeNacimiento,String fechaDeRegistro, String ficheroDeGuardado) {
-        if(indentificacionDeUsuario.length()!=10){
+        if(indentificacionDeUsuario.length()!= CANTIDAD_DE_NUMEROS_IDENTIFICACION){
             throw new IllegalArgumentException("El  identificador de usuario ha de tener 10 carácteres");
         }
         this.indentificacionDeUsuario = indentificacionDeUsuario;

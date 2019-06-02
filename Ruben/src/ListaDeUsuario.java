@@ -6,30 +6,43 @@ import java.util.*;
 public class ListaDeUsuario{
 
     private static File ficheroDeGuardadoUsuarios= new File("usuarios.txt");
-    Set<Usuario> usuarios=new HashSet<>();
+    private Map<String,Usuario> usuarios=new HashMap<>();
+
+    {
+        if(ficheroDeGuardadoUsuarios.exists()){
+            this.leer();
+        }
+    }
+
+    public Usuario elegirUsuario(String numeroDeIdentificacion){
+        if (estaElUsuario(numeroDeIdentificacion)){
+            return usuarios.get(numeroDeIdentificacion);
+        }
+        return null;
+    }
 
     public void anyadirUsuario(Usuario nuevoUsuario){
-        if(usuarios.contains(nuevoUsuario)){
+        if(usuarios.containsKey(nuevoUsuario.getIndentificacionDeUsuario())){
             throw new IllegalArgumentException("Error,no se pueden introducir dos usuarios iguales");
         }
-        usuarios.add(nuevoUsuario);
+        usuarios.put(nuevoUsuario.getIndentificacionDeUsuario(),nuevoUsuario);
     }
 
     public void eliminarUsuario(Usuario usuario){
-        if(!usuarios.contains(usuario)){
+        if(!usuarios.containsKey(usuario.getIndentificacionDeUsuario())){
             throw new IllegalArgumentException("El usuario no existe");
         }
         usuarios.remove(usuario);
     }
 
-    public boolean estaElUsuario(Usuario usuario){
-        return usuarios.contains(usuario);
+    public boolean estaElUsuario(String numerodeUsuario){
+        return usuarios.containsKey(numerodeUsuario);
     }
 
     public void escribir() {
-        Iterator<Usuario> iterator=usuarios.iterator();
+        Iterator<String> iterator=usuarios.keySet().iterator();
         while(iterator.hasNext()){
-            iterator.next().escribir(ficheroDeGuardadoUsuarios);
+            usuarios.get(iterator.next()).escribir(ficheroDeGuardadoUsuarios);
         }
     }
 
@@ -43,10 +56,11 @@ public class ListaDeUsuario{
                 for (int i = 0; i < Usuario.LINEAS_DE_LECTURA; i++) {
                     lineasDelUsuarioAcutual[i] = iterator.next();
                 }
-                usuarios.add(new Usuario(lineasDelUsuarioAcutual[0], lineasDelUsuarioAcutual[1], lineasDelUsuarioAcutual[2], lineasDelUsuarioAcutual[3], lineasDelUsuarioAcutual[4], lineasDelUsuarioAcutual[5],lineasDelUsuarioAcutual[0]));
+                usuarios.put(lineasDelUsuarioAcutual[0],new Usuario(lineasDelUsuarioAcutual[0],lineasDelUsuarioAcutual[1], lineasDelUsuarioAcutual[2], lineasDelUsuarioAcutual[3], lineasDelUsuarioAcutual[4], lineasDelUsuarioAcutual[5],lineasDelUsuarioAcutual[0]));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }

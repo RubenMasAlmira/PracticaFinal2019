@@ -6,9 +6,35 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 public class DialogoNuevoHeroe extends JDialog {
+    Heroe nuevoHeroe;
     JComboBox tipoHeroe=new JComboBox<String>();
-    JPanel panelDeHeroeActual;
-    PanelAceptarYCancelar aceptarYCancelar;
+    creacionableHeroico panelDeHeroeActual;
+    PanelAceptarYCancelar aceptarYCancelar=new PanelAceptarYCancelar() {
+        @Override
+        public ActionListener aceptar() {
+            return new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        nuevoHeroe =panelDeHeroeActual.crearHeroe();
+                        dispose();
+                    } catch (IllegalArgumentException iae) {
+                        JOptionPane.showMessageDialog(null, iae.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            };
+        }
+
+        @Override
+        public ActionListener cancelar() {
+            return new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    dispose();
+                }
+            };
+        }
+    };
 
     DialogoNuevoHeroe(){
         setModal(true);
@@ -22,7 +48,7 @@ public class DialogoNuevoHeroe extends JDialog {
 
         setTitle("Nuevo "+tipoHeroe.getSelectedItem());
         cambiaTipoDePanelDeHeroeActual((String)tipoHeroe.getSelectedItem());
-        add(panelDeHeroeActual,BorderLayout.CENTER);
+        add((JPanel)panelDeHeroeActual,BorderLayout.CENTER);
 
         //todo Hacer que te deje cambiar entre todas las opciones libremente
         //todo Solucionar el error relacionado a que no se puedan crear Heroes de forma normal
@@ -30,9 +56,9 @@ public class DialogoNuevoHeroe extends JDialog {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 setTitle("Nuevo "+tipoHeroe.getSelectedItem());
-                remove(panelDeHeroeActual);
+                remove((JPanel)panelDeHeroeActual);
                 cambiaTipoDePanelDeHeroeActual((String)tipoHeroe.getSelectedItem());
-                add(panelDeHeroeActual,BorderLayout.CENTER);
+                add((JPanel)panelDeHeroeActual,BorderLayout.CENTER);
                 setVisible(false);
                 setVisible(true);
             }
@@ -41,13 +67,12 @@ public class DialogoNuevoHeroe extends JDialog {
 
 
 
-        aceptarYCancelar=new PanelAceptarYCancelar(this,(creacionableHeroico) panelDeHeroeActual);
         add(aceptarYCancelar,BorderLayout.SOUTH);
         setVisible(true);
     }
 
 
-    private JPanel cambiaTipoDePanelDeHeroeActual(String tipoHeroe){
+    private creacionableHeroico cambiaTipoDePanelDeHeroeActual(String tipoHeroe){
         if("Heroe Normal".toUpperCase().equals(tipoHeroe.toUpperCase())){
             return panelDeHeroeActual=new PanelDeHeroe();
         }else if("Heroe con identidad secreta".toUpperCase().equals(tipoHeroe.toUpperCase())){
@@ -58,9 +83,7 @@ public class DialogoNuevoHeroe extends JDialog {
     }
 
     public Heroe getHeroe() {
-        return aceptarYCancelar.getNuevoHeroe();
+        return nuevoHeroe;
     }
 
-/*
-                */
 }
