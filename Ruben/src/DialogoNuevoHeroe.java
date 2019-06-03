@@ -51,7 +51,6 @@ public class DialogoNuevoHeroe extends JDialog {
         add((JPanel)panelDeHeroeActual,BorderLayout.CENTER);
 
         //todo Hacer que te deje cambiar entre todas las opciones libremente
-        //todo Solucionar el error relacionado a que no se puedan crear Heroes de forma normal
         tipoHeroe.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -83,7 +82,6 @@ public class DialogoNuevoHeroe extends JDialog {
     }
 
     public Heroe getHeroe() {
-        System.out.println(nuevoHeroe);
         return nuevoHeroe;
     }
 
