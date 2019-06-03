@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 
 public class PanelDeIntroduccionDelUsuario extends JPanel {
     protected JTextField numeroUsuario =new JTextField(20);
@@ -19,12 +18,10 @@ public class PanelDeIntroduccionDelUsuario extends JPanel {
 
             }
         });
-        numeroUsuario.addKeyListener(new KeyAdapter() {
+        addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-                if(numeroUsuario.getText().length() ==9){
-
-                }
+                numeroUsuario.setText(""+numeroUsuario+e.getKeyChar());
             }
         });
     }

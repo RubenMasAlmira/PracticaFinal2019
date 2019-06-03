@@ -19,15 +19,20 @@ public class Usuario implements Escribible{
             throw new IllegalArgumentException("El  identificador de usuario ha de tener 10 carácteres");
         }
         this.indentificacionDeUsuario = indentificacionDeUsuario;
+        if (Utilidades.comprobarVacio(nombre)) {
+            throw new IllegalArgumentException("El nombre no puede estar vacio");
+        }
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.correoElectronico = correoElectronico;
         this.fechaDeNacimiento=fechaDeNacimiento;
         this.fechaDeRegistro=fechaDeRegistro;
-        if(ficheroDeGuardado=="" || ficheroDeGuardado==null || !Paths.get(ficheroDeGuardado).toFile().exists()){
+        if(Utilidades.comprobarVacio(ficheroDeGuardado) || !Paths.get(ficheroDeGuardado).toFile().exists()){
             this.listaDeHeroes =new ListaDeHeroes(indentificacionDeUsuario);
+
         }else{
-            this.listaDeHeroes = listaDeHeroes.leer(Paths.get(indentificacionDeUsuario).toFile());
+            this.listaDeHeroes = ListaDeHeroes.leer(indentificacionDeUsuario);
+
         }
     }
 
@@ -86,23 +91,15 @@ public class Usuario implements Escribible{
     @Override
     public String stringDeEscritura() {
         String salida="";
-        salida+=this.indentificacionDeUsuario +" \n";
-        salida+=this.nombre+" \n";
-        salida+=this.apellidos+" \n";
-        salida+=this.correoElectronico+" \n";
-        salida+=this.fechaDeNacimiento+" \n";
-        salida+=this.fechaDeRegistro+" \n";
+        salida+=this.indentificacionDeUsuario +"\n";
+        salida+=this.nombre+"\n";
+        salida+=this.apellidos+"\n";
+        salida+=this.correoElectronico+"\n";
+        salida+=this.fechaDeNacimiento+"\n";
+        salida+=this.fechaDeRegistro+"\n";
         return salida;
     }
 
-    @Override
-    public void escribir(File fichero)  {
-        try(FileWriter fw = new FileWriter(fichero)) {
-            fw.write(this.stringDeEscritura());
-            listaDeHeroes.escribir();
-        }catch (IOException ioe){
-            ioe.printStackTrace();
-        }
-    }
+
 
 }

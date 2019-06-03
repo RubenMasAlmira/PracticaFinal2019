@@ -83,6 +83,7 @@ public class DialogoNuevoHeroe extends JDialog {
     }
 
     public Heroe getHeroe() {
+        System.out.println(nuevoHeroe);
         return nuevoHeroe;
     }
 

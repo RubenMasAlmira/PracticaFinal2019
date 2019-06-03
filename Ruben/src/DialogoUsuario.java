@@ -1,29 +1,74 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DialogoUsuario extends JDialog {
-    Usuario usuarioActual;
+    private Usuario usuarioActual;
     private PanelDeIntroduccionDelUsuario panelIntroduccionUsuario =new PanelDeIntroduccionDelUsuario();
-    private PanelNuevoUsuario panelNuevoUsuario;
+    private PanelNuevoUsuario panelNuevoUsuario=new PanelNuevoUsuario();
+    private ListaDeUsuario listaDeUsuario=new ListaDeUsuario();
     private PanelAceptarYCancelar aceptarYCancelarUsuario= new PanelAceptarYCancelar() {
         @Override
         public ActionListener aceptar() {
             return new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if(numeroDeIdentificacionValido(panelIntroduccionUsuario.getNumeroUsuario()) && !listaDeUsuario.estaElUsuario(panelIntroduccionUsuario.getNumeroUsuario()) && !"".equals(panelIntroduccionUsuario.getNumeroUsuario())){
-                        remove(panelIntroduccionUsuario);
-                        setTitle("Nuevo Usuario");
-                        panelNuevoUsuario=new PanelNuevoUsuario(panelIntroduccionUsuario.getNumeroUsuario());
-                        add(panelNuevoUsuario, BorderLayout.CENTER);
-                        setVisible(false);
-                        setVisible(true);
+                    if(!numeroDeIdentificacionValido(panelIntroduccionUsuario.getNumeroUsuario())){
+                        JOptionPane.showMessageDialog(null,"El número de usuario ha de ser de "+ Usuario.CANTIDAD_DE_NUMEROS_IDENTIFICACION+" números.","Error",JOptionPane.ERROR_MESSAGE);
+                    } else if(!listaDeUsuario.estaElUsuario(panelIntroduccionUsuario.getNumeroUsuario())){
+                        nuevoUsuario();
+                    }else{
+                        usuarioActual=listaDeUsuario.elegirUsuario(panelIntroduccionUsuario.getNumeroUsuario());
+                        dispose();
                     }
 
                 }
             };
+        }
+        private void nuevoUsuario(){
+            DialogoUsuario.this.remove(panelIntroduccionUsuario);
+            setTitle("Nuevo Usuario");
+            DialogoUsuario.this.add(panelNuevoUsuario, BorderLayout.CENTER);
+            setVisible(false);
+            DialogoUsuario.this.remove(aceptarYCancelarUsuario);
+            aceptarYCancelarUsuario=new PanelAceptarYCancelar() {
+                @Override
+                public ActionListener aceptar() {
+                    return new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            try{
+                                usuarioActual=new Usuario(panelIntroduccionUsuario.getNumeroUsuario(),
+                                        panelNuevoUsuario.getNombre(),
+                                        panelNuevoUsuario.getApellidos(),
+                                        panelNuevoUsuario.getCorreoElectronico(),
+                                        panelNuevoUsuario.getFechaDeNacimiento());
+                                listaDeUsuario.anyadirUsuario(usuarioActual);
+                                listaDeUsuario.escribir();
+                                dispose();
+                            }catch (IllegalArgumentException iae){
+                                JOptionPane.showMessageDialog(null,iae.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                    };
+
+                }
+
+                @Override
+                public ActionListener cancelar() {
+                    return new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            dispose();
+                        }
+                    };
+                }
+            };
+            DialogoUsuario.this.add(aceptarYCancelarUsuario, BorderLayout.SOUTH);
+
+            setVisible(true);
         }
 
         @Override
@@ -36,7 +81,7 @@ public class DialogoUsuario extends JDialog {
             };
         }
     };
-    private ListaDeUsuario listaDeUsuario=new ListaDeUsuario();
+
     DialogoUsuario(){
         setModal(true);
         setTitle("Usuario");
@@ -48,7 +93,7 @@ public class DialogoUsuario extends JDialog {
         setModal(true);
         pack();
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
     }
     private static boolean numeroDeIdentificacionValido(String numeroDeValidacion){
@@ -57,9 +102,5 @@ public class DialogoUsuario extends JDialog {
 
     public Usuario getUsuario() {
         return usuarioActual;
-    }
-
-    public static void main(String[] args) {
-        new DialogoUsuario();
     }
 }
