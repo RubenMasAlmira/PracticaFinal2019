@@ -7,8 +7,7 @@ public class PanelBotonesHeroe extends JPanel {
     Usuario usuarioActual;
     public PanelBotonesHeroe(Usuario usuarioActual) {
         setLayout(new GridLayout(0,1));
-        try {
-            for (Heroe h : usuarioActual.getListaDeHeroes().getLista()) {
+        for (Heroe h : usuarioActual.getListaDeHeroes().getLista()) {
                 JButton BotonHeroe = new JButton(h.toString());
                 BotonHeroe.addActionListener(new ActionListener() {
                     @Override
@@ -18,9 +17,6 @@ public class PanelBotonesHeroe extends JPanel {
                 });
                 add(BotonHeroe);
             }
-        }catch (NullPointerException npe){
-            JOptionPane.showMessageDialog(null,"No se ha añadido ningún heroe","Atención",JOptionPane.INFORMATION_MESSAGE);
-        }
     }
 
     private void anyadeDialogoDeHeroe(Heroe heroeActual){

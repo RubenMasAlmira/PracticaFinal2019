@@ -15,7 +15,7 @@ public class VentanaPrincipal extends JFrame {
             pedirUsuario = new DialogoUsuario();
             usuarioActual = pedirUsuario.getUsuario();
             //salida para ver el usuario actual
-            System.out.println(usuarioActual);
+            //System.out.println(usuarioActual);
             //
             panelDelUsuarioAcutal = new PanelDeListaDeHeroes(usuarioActual);
             add(panelDelUsuarioAcutal);

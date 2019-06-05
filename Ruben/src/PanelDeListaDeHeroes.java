@@ -7,6 +7,7 @@ public class PanelDeListaDeHeroes extends JPanel{
 
     private JButton anyadir;
     private PanelBotonesHeroe heroes;
+    DialogoNuevoHeroe nuevoHeroe;
 
 
     PanelDeListaDeHeroes(Usuario usuarioActual) {
@@ -19,8 +20,11 @@ public class PanelDeListaDeHeroes extends JPanel{
         anyadir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DialogoNuevoHeroe nuevoHeroe=new DialogoNuevoHeroe();
+                nuevoHeroe=new DialogoNuevoHeroe();
                 try{
+                    if(nuevoHeroe.getHeroe()==null){
+                        JOptionPane.showMessageDialog(null,"No se ha añadido ningún heroe","Atención",JOptionPane.WARNING_MESSAGE);
+                    }else{
                     usuarioActual.getListaDeHeroes().anyadirHeroe(nuevoHeroe.getHeroe());
                     usuarioActual.getListaDeHeroes().escribir();
                     setVisible(false);
@@ -28,6 +32,7 @@ public class PanelDeListaDeHeroes extends JPanel{
                     heroes=new PanelBotonesHeroe(usuarioActual);
                     add(heroes,BorderLayout.CENTER);
                     setVisible(true);
+                    }
                 }catch (NullPointerException npe){
                     System.out.println("No se añade ningún heroe");
                 }

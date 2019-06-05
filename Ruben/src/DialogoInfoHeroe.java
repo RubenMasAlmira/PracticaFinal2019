@@ -1,5 +1,13 @@
+import javafx.scene.control.Dialog;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 public class DialogoInfoHeroe extends JDialog {
 
@@ -11,8 +19,25 @@ public class DialogoInfoHeroe extends JDialog {
         setBounds(20,50,200,500);
         setLocationRelativeTo(null);
         add(infoAdecuada(heroeActual),BorderLayout.CENTER);
-        add(new PanelBotonesDeModificacionYBorrado(),BorderLayout.SOUTH);
+        add(new PanelModificacionYBorrado() {
+            @Override
+            public ActionListener modificar() {
+                return new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        new DialogoNuevoHeroe();
+
+                    }
+                };
+            }
+
+            @Override
+            public ActionListener borrar() {
+                return null;
+            }
+        },BorderLayout.SOUTH);
         setVisible(true);
+
 
     }
 
@@ -28,6 +53,8 @@ public class DialogoInfoHeroe extends JDialog {
 
 }
 class JLabelInfoHeroe extends JLabel{
+    public static final int SEPARACION_LINEAS = 4;
+
     JLabelInfoHeroe(Heroe heroeActual){
         setLayout(new GridLayout(0,1));
         add(Utilidades.ponerJLabelTitulo("Heroe"));
@@ -35,9 +62,10 @@ class JLabelInfoHeroe extends JLabel{
         add(new JLabel("Nivel: "+heroeActual.getNivelDePoder()));
         add(new JLabel("Grupo de poder: "+heroeActual.getEstadioDePoder()));
         if(!Utilidades.comprobarVacio(heroeActual.getDescripcion())){
-            add(new JLabel("Descripción: "+heroeActual.descripcion));
+            add(new JLabel("Descripción: "+heroeActual.getDescripcion()));
         }
     }
+
 
 
 

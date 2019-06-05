@@ -17,6 +17,7 @@ public class DialogoNuevoHeroe extends JDialog {
                 public void actionPerformed(ActionEvent e) {
                     try {
                         nuevoHeroe =panelDeHeroeActual.crearHeroe();
+                        System.out.println(nuevoHeroe);
                         dispose();
                     } catch (IllegalArgumentException iae) {
                         JOptionPane.showMessageDialog(null, iae.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -30,6 +31,8 @@ public class DialogoNuevoHeroe extends JDialog {
             return new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    nuevoHeroe=null;
+                    System.out.println("ejecutadoCancelar");
                     dispose();
                 }
             };
