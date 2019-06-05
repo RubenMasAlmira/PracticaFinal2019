@@ -3,7 +3,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelDeListaDeHeroes extends JFrame {
+public class PanelDeListaDeHeroes extends JPanel{
+
     private JButton anyadir;
     private PanelBotonesHeroe heroes;
 
@@ -21,6 +22,7 @@ public class PanelDeListaDeHeroes extends JFrame {
                 DialogoNuevoHeroe nuevoHeroe=new DialogoNuevoHeroe();
                 try{
                     usuarioActual.getListaDeHeroes().anyadirHeroe(nuevoHeroe.getHeroe());
+                    usuarioActual.getListaDeHeroes().escribir();
                     setVisible(false);
                     PanelDeListaDeHeroes.this.remove(heroes);
                     heroes=new PanelBotonesHeroe(usuarioActual);
@@ -33,9 +35,6 @@ public class PanelDeListaDeHeroes extends JFrame {
             }
         });
         add(anyadir,BorderLayout.NORTH);
-
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
     }
 }

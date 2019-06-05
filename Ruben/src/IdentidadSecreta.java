@@ -1,8 +1,6 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.Serializable;
 
-public class IdentidadSecreta{
+public class IdentidadSecreta implements Serializable {
     private final String nombreReal;
 
     IdentidadSecreta(String nombreReal){
@@ -19,9 +17,6 @@ public class IdentidadSecreta{
     @Override
     public String toString() {
         return nombreReal;
-    }
-
-    public void escribir() {
     }
 
 

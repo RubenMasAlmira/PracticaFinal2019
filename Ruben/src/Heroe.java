@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Heroe{
+public class Heroe implements Serializable{
     protected final String nombreHeroico;
     protected int nivelDePoder;
     protected final String descripcion;

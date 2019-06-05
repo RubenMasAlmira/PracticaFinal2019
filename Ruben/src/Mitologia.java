@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Mitologia {
+public class Mitologia implements Serializable {
     private final String nombre;
     private final String origen;
 

@@ -100,6 +100,14 @@ public class Usuario implements Escribible{
         return salida;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "IDUsuario='" + indentificacionDeUsuario + "\n" +
+                "nombre=" + nombre + "\n" +
+                "apellidos='" + apellidos + "\n" +
+                "correoElectronico=" + correoElectronico + "\n" +
+                "fechaDeNacimiento=" + fechaDeNacimiento + "\n" +
+                "fechaDeRegistro=" + fechaDeRegistro + "\n" +
+                "listaDeHeroes=" + listaDeHeroes;
+    }
 }
